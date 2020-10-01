@@ -18,12 +18,12 @@ module Enumerable
 
 
 
-    
+
    # ["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index }
 
-    ["Walmart", "Exxon Mobil", "Apple", "Berkshire Hathaway", "Amazon.com"].my_each_with_index do | company, index|
-     puts "#{index}. #{company}"
-    end
+    # ["Walmart", "Exxon Mobil", "Apple", "Berkshire Hathaway", "Amazon.com"].my_each_with_index do | company, index|
+    #  puts "#{index}. #{company}"
+    # end
     
   
 
