@@ -24,7 +24,23 @@ module Enumerable
         selected
     end
 
+    def my_all?
+        self.my_each do |i|
+            return false if !yield i          
+        end
+        return true
+    end
 
+
+    #My_any
+
+    def my_any?
+        self.my_each do |i|
+            return true if yield i
+        end
+        return false
+    end
+    
 
    # ["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index }
 
@@ -34,7 +50,8 @@ module Enumerable
     
    # puts ["Jeph", "Anna", "Jack", "Eva"].my_select { |friend| friend != 'Jeph' }
 
-  
+    #puts %w[ant bear cat].my_all? { |word| word.length >= 4 }
+    
 
 end
 
