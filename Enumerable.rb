@@ -41,6 +41,14 @@ module Enumerable
         return false
     end
     
+    def my_none?
+        self.my_each do |i|
+            return false if yield i
+        end
+        return true
+    end
+
+
 
    # ["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index }
 
