@@ -9,9 +9,23 @@ module Enumerable
         end
     end
 
-    
+    def my_each_with_index
+        for i in 0..self.length-1 do
+            yield self[i], i
+        end
 
-    #["Jeph", "Anna", "Jack", "Eva"].each { |friend| puts "Hello, " + friend }
-    ["Jeph", "Anna", "Jack", "Eva"].my_each { |friend| puts "Helloo, " + friend }
+    end
+
+
+
+    
+   # ["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index }
+
+    ["Walmart", "Exxon Mobil", "Apple", "Berkshire Hathaway", "Amazon.com"].my_each_with_index do | company, index|
+     puts "#{index}. #{company}"
+    end
+    
+  
+
 end
 
