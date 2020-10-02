@@ -68,9 +68,58 @@ module Enumerable
         map
     end
 
+    def my_inject(times = nil)
+        tot = times
+        tot = 0 if times.nil?
+        self.my_each do |a|
+            tot = yield(a, tot) 
+        end
+        tot
+    end
+
+    #Test #my_inject by creating a method called #multiply_els which 
+    #multiplies all the elements of the array together by using #my_inject, 
+    #e.g. multiply_els([2,4,5]) #=> 40
+
+    def self.multiply_els(times = nil)
+        tot = 1
+        return tot if times.nil?
+        times.my_inject do |a|
+            # print a
+            tot *= a
+        end
+        tot
+    end
+
+
+
+    
+
+
+    # puts multiply_els([2,4,5]) 
+
+    #[1, 2, 3].my_each_inject { |n,i| puts "Current number is: #{i} - #{n} " }
+
+    # puts [1, 2, 3, 4].inject(0) { |result, element| result + element } #10
+    # puts (5..10).inject { |sum, n| sum + n }       #=> 45
+    # puts (5..10).my_inject { |sum, n| sum + n }       #=> 45
+    # # puts (5..10).inject(1) { |product, n| product * n } #=> 151200
+
+    # puts [1, 2, 3, 4].my_inject2(0) { |result, element| result + element } #10
+    # puts [1, 2, 3, 4].my_inject(0) { |result, element| result + element } #10
+    # #puts (5..10).my_inject { |sum, n| sum + n }            #=> 45
+    # puts (5..10).my_inject2(1) { |product, n| product * n } #=> 151200
+    # puts (5..10).my_inject(1) { |product, n| product * n } #=> 151200
+
+
  
 
-#   puts [1,2,3,4].my_map { |i| i*2 }  
+
+
+
+    #map 2  param.call(a) arr.push(yield(param.call(a)))
+
+   #puts [1,2,3,4].my_map { |i| i+2 }  
 
 # friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
 
@@ -82,10 +131,10 @@ module Enumerable
 
 
     
-   # ["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index }
+    #["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index }
 
     # ["Walmart", "Exxon Mobil", "Apple", "Berkshire Hathaway", "Amazon.com"].my_each_with_index do | company, index|
-    #  puts "#{index}. #{company}"
+    #     puts "#{index}. #{company}"
     # end
     
    # puts ["Jeph", "Anna", "Jack", "Eva"].my_select { |friend| friend != 'Jeph' }
