@@ -85,15 +85,30 @@ module Enumerable
         tot = 1
         return tot if times.nil?
         times.my_inject do |a|
-            # print a
             tot *= a
         end
         tot
     end
 
+    # Modify your #my_map method to take a proc instead.
+    p = Proc.new { |i| puts i+2 }
 
+    def my_map_proc(proc)
+        self.each do |name|
+            proc.call(name)
+        end
+    end
 
-    
+    [1,2,3,4].my_map_proc(p)
+   
+
+    def self.merci_qui(proc)
+    proc.call(@staff.first)
+    end
+
+    merci_qui(p)
+    # => Merci bibi
+
 
 
     # puts multiply_els([2,4,5]) 
