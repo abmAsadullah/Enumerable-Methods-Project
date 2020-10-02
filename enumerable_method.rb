@@ -110,7 +110,7 @@ module Enumerable
       self.my_each do |i|
         map.push(yield i) if yield i
       end
-    else 
+    else
       self
     end
     map
