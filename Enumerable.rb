@@ -20,7 +20,7 @@ module Enumerable
     def my_select
         selected = Array.new
         self.my_each do |i|
-            selected << i if yield i        
+            selected << i if yield i
         end
         selected
     end
@@ -38,7 +38,7 @@ module Enumerable
         end
         return false
     end
-    
+
     def my_none?
         self.my_each do |i|
             return false if yield i
@@ -58,25 +58,24 @@ module Enumerable
         end
         return nbr if params == ""
         return nbr_arg
-        
     end
 
-
-#my_map
     def my_map
         map = Array.new
         self.my_each do |i|
-            map.push(i) if yield i        
+            map.push(yield i) if yield i
         end
         map
     end
 
+ 
 
-  puts  (1..4).my_map { |i| i*i }  
+#   puts [1,2,3,4].my_map { |i| i*2 }  
 
-friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
+# friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
 
-print friends.my_map { |friend| friend.upcase }
+# print friends.my_map { |friend| friend.upcase }
+#print friends.my_map2 { |friend| friend.upcase }
 
 
 #=> `['SHARON', 'LEO', 'LEILA', 'BRIAN', 'ARUN']`
