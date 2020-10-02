@@ -91,7 +91,6 @@ module Enumerable
     end
 
     # Modify your #my_map method to take a proc instead.
-    p = Proc.new { |i| puts i+2 }
 
     def my_map_proc(proc)
         self.each do |name|
@@ -99,15 +98,6 @@ module Enumerable
         end
     end
 
-    [1,2,3,4].my_map_proc(p)
-   
-
-    def self.merci_qui(proc)
-    proc.call(@staff.first)
-    end
-
-    merci_qui(p)
-    # => Merci bibi
 
 
 
