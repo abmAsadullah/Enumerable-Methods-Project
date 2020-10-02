@@ -98,81 +98,20 @@ module Enumerable
         end
     end
 
-
-
-
-    # puts multiply_els([2,4,5]) 
-
-    #[1, 2, 3].my_each_inject { |n,i| puts "Current number is: #{i} - #{n} " }
-
-    # puts [1, 2, 3, 4].inject(0) { |result, element| result + element } #10
-    # puts (5..10).inject { |sum, n| sum + n }       #=> 45
-    # puts (5..10).my_inject { |sum, n| sum + n }       #=> 45
-    # # puts (5..10).inject(1) { |product, n| product * n } #=> 151200
-
-    # puts [1, 2, 3, 4].my_inject2(0) { |result, element| result + element } #10
-    # puts [1, 2, 3, 4].my_inject(0) { |result, element| result + element } #10
-    # #puts (5..10).my_inject { |sum, n| sum + n }            #=> 45
-    # puts (5..10).my_inject2(1) { |product, n| product * n } #=> 151200
-    # puts (5..10).my_inject(1) { |product, n| product * n } #=> 151200
-
-
- 
-
-
-
-
-    #map 2  param.call(a) arr.push(yield(param.call(a)))
-
-   #puts [1,2,3,4].my_map { |i| i+2 }  
-
-# friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
-
-# print friends.my_map { |friend| friend.upcase }
-#print friends.my_map2 { |friend| friend.upcase }
-
-
-#=> `['SHARON', 'LEO', 'LEILA', 'BRIAN', 'ARUN']`
-
-
-    
-    #["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index }
-
-    # ["Walmart", "Exxon Mobil", "Apple", "Berkshire Hathaway", "Amazon.com"].my_each_with_index do | company, index|
-    #     puts "#{index}. #{company}"
-    # end
-    
-   # puts ["Jeph", "Anna", "Jack", "Eva"].my_select { |friend| friend != 'Jeph' }
-
-    #puts %w[ant bear cat].my_all? { |word| word.length >= 4 }
-
-    # declaring array 3
-    # a = ["abc", "nil", "dog"]
-    # #a = [18, 22, 33, nil, 5, 6]
-    
-    # # # declaring array 
-    # b = ["cow", nil, "dog"] 
-    #  #b = [1, 4, 1, 1, 88, 9, 1]
-
-    
-    # # # declaring array 0
-    # #c = ["cat", nil, nil] 
-    # c = [18, 22, nil, nil, 50, 6] 
-
-    
-    # #counting total elements 
-    # puts "counting a : #{a.count}\n\n"
-    # puts "counting a : #{a.my_count}\n\n"
-    
-    # # counting 1 -  
-    # puts "my counting b : #{b.my_count(1)}\n\n"
-    # puts "counting b : #{b.count(1)}\n\n"
-    
-    
-    # # # counting 'nil' 2
-    # puts "counting c : #{c.my_count(nil)} \n\n"
-    # puts "counting c : #{c.count(nil)}\n\n"
-    
-
+    def my_map_block_proc(times=nil)
+        map = Array.new
+        if times.nil? and block_given?
+            self.my_each do |i|
+                map.push(times.call(i)) if times.call(i)
+            end
+        elsif times.nil? 
+            self.my_each do |i|
+                map.push(yield i) if yield i
+            end
+        else 
+            self
+        end
+        map
+    end
 end
 
