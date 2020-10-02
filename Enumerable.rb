@@ -61,6 +61,27 @@ module Enumerable
         
     end
 
+
+#my_map
+    def my_map
+        map = Array.new
+        self.my_each do |i|
+            map.push(i) if yield i        
+        end
+        map
+    end
+
+
+  puts  (1..4).my_map { |i| i*i }  
+
+friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
+
+print friends.my_map { |friend| friend.upcase }
+
+
+#=> `['SHARON', 'LEO', 'LEILA', 'BRIAN', 'ARUN']`
+
+
     
    # ["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index }
 
