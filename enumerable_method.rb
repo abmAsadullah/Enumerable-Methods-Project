@@ -31,26 +31,26 @@ module Enumerable
     selected
   end
 
-  def my_all?
-    return true unless block_given?
+  def my_all?(args=nil)
+    return true unless block_given? && args.nil?
     self.my_each do |i|
-      false unless yield i
+      return false unless yield i
     end
     true
   end
 
-  def my_any?
-    return true unless block_given?
+  def my_any?(args=nil)
+    return true unless block_given? && args.nil?
     self.my_each do |i|
-      true if yield i
+      return true if yield i
     end
     false
   end
 
-  def my_none?
-    return true unless block_given?
+  def my_none?(args=nil)
+    return true unless block_given? && args.nil?
     self.my_each do |i|
-      false if yield i
+      return false if yield i
     end
     true
   end
@@ -130,7 +130,9 @@ module Enumerable
   #(5..50).my_each_with_index { |num| num }
   # (5..50).my_each_with_index { |num, i| num.to_s + i.to_s  }
   # (5..50).each_with_index { |num, i| num.to_s + i.to_s  }
-  
+  #puts %w[ant bear cat].my_all?("6") { |word| word.length >= 4 }
+  puts %w[ant bear cat].all? { |word| word.length >= 6 }
+  puts %w[ant bear cat].my_all?(3) { |word| word.length >= 6 }
 
 
 
