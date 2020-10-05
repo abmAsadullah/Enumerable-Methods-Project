@@ -6,6 +6,7 @@ module Enumerable
 
   def my_each
     return self unless block_given?
+
     for value in self do
       yield value
     end
@@ -13,6 +14,7 @@ module Enumerable
 
   def my_each_with_index
     return self unless block_given?
+
     index = 0
     for i in self do
       yield i, index
@@ -24,6 +26,7 @@ module Enumerable
 
   def my_select
     return self unless block_given?
+
     selected = []
     self.my_each do |i|
       selected << i if yield i
@@ -33,6 +36,7 @@ module Enumerable
 
   def my_all?(args=nil)
     return true unless block_given? && args.nil?
+
     self.my_each do |i|
       return false unless yield i
     end
@@ -41,6 +45,7 @@ module Enumerable
 
   def my_any?(args=nil)
     return true unless block_given? && args.nil?
+
     self.my_each do |i|
       return true if yield i
     end
@@ -49,6 +54,7 @@ module Enumerable
 
   def my_none?(args=nil)
     return true unless block_given? && args.nil?
+
     self.my_each do |i|
       return false if yield i
     end
@@ -82,7 +88,7 @@ module Enumerable
     else
       return self
     end
-    return array
+    array
   end
 
   def my_inject(times = nil)
@@ -122,56 +128,4 @@ module Enumerable
     end
     map
   end
-
-  #["Jeph", "Anna", "Jack", "Eva"].my_each { |friend| puts "Helloo, " + friend  }
-  #["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index.to_s }
-  #["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index.to_s }
-  #["Jeph", "Anna", "Jack", "Eva"].my_each_with_index 
-  #(5..50).my_each_with_index { |num| num }
-  # (5..50).my_each_with_index { |num, i| num.to_s + i.to_s  }
-  # (5..50).each_with_index { |num, i| num.to_s + i.to_s  }
-  #puts %w[ant bear cat].my_all?("6") { |word| word.length >= 4 }
-  #puts ["ant", "bear", "cat", /like/].all? { |word| word.length >= 3 }
-  #puts ["ant", "bear", "cat", /like/].my_all? { |word| word.length >= 3}
-
-  # # declaring array 3
-  #   a = ["abc", "nil", "dog"]
-  #   #a = [18, 22, 33, nil, 5, 6]
-    
-  #   # # declaring array 
-  #   b = ["cow", nil, "dog"] 
-  #    #b = [1, 4, 1, 1, 88, 9, 1]
-
-    
-  #   # # declaring array 0
-  #   #c = ["cat", nil, nil] 
-  #   c = [18, 22, nil, nil, 50, 6] 
-
-    
-  #   #counting total elements 
-  #   puts "my counting a : #{a.my_count}\n\n"
-  #   puts "counting a : #{a.count}\n\n"
-    
-  #   # counting 1 -  
-  #   puts "my counting b : #{b.my_count(1)}\n\n"
-  #   puts "counting b : #{b.count(1)}\n\n"
-    
-    
-  #   # # counting 'nil' 2
-  #   puts "my counting c : #{c.my_count(nil)} \n\n"
-  #   puts "counting c : #{c.count(nil)}\n\n"
-
-#   p [1, 2, 3, 4].map { |num| num > 0 }
-#   p [1, 2, 3, 4].my_map { |num| num > 0 }
-
-#   p = Proc.new { |i| puts i+2 }
-#   [1,2,3,4].my_map(p)
-
-
-
-# friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
-
-#   p friends.map { |friend| friend.upcase }
-#   p friends.my_map { |friend| friend.upcase }
-
 end
