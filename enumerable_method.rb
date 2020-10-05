@@ -5,6 +5,7 @@ module Enumerable
   # Make sure it returns the same thing as #each as well.
 
   def my_each
+    return self unless block_given?
     for value in self do
       yield value
     end
@@ -114,4 +115,8 @@ module Enumerable
     end
     map
   end
+
+  ["Jeph", "Anna", "Jack", "Eva"].my_each 
+
+
 end
