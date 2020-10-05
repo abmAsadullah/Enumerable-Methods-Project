@@ -23,6 +23,7 @@ module Enumerable
   # Create #my_select in the same way, though you may use #my_each in your definition (but not #each).
 
   def my_select
+    return self unless block_given?
     selected = []
     self.my_each do |i|
       selected << i if yield i
@@ -31,6 +32,7 @@ module Enumerable
   end
 
   def my_all?
+    return true unless block_given?
     self.my_each do |i|
       false unless yield i
     end
@@ -38,6 +40,7 @@ module Enumerable
   end
 
   def my_any?
+    return true unless block_given?
     self.my_each do |i|
       true if yield i
     end
@@ -45,6 +48,7 @@ module Enumerable
   end
 
   def my_none?
+    return true unless block_given?
     self.my_each do |i|
       false if yield i
     end
