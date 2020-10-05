@@ -28,34 +28,38 @@ module Enumerable
     return self unless block_given?
 
     selected = []
-    self.my_each do |i|
+    arr = self
+    arr.my_each do |i|
       selected << i if yield i
     end
     selected
   end
 
-  def my_all?(args=nil)
+  def my_all?(args = nil)
     return true unless block_given? && args.nil?
 
-    self.my_each do |i|
+    arr = self
+    arr.my_each do |i|
       return false unless yield i
     end
     true
   end
 
-  def my_any?(args=nil)
+  def my_any?(args = nil)
     return true unless block_given? && args.nil?
 
-    self.my_each do |i|
+    ar = self
+    ar.my_each do |i|
       return true if yield i
     end
     false
   end
 
-  def my_none?(args=nil)
+  def my_none?(args = nil)
     return true unless block_given? && args.nil?
 
-    self.my_each do |i|
+    arr = self
+    arr.my_each do |i|
       return false if yield i
     end
     true
@@ -64,7 +68,8 @@ module Enumerable
   def my_count(params = '')
     nbr = 0
     nbr_arg = 0
-    self.my_each do |i|
+    arr = self
+    arr.my_each do |i|
       if i == params
         nbr_arg += 1
       else
@@ -72,17 +77,20 @@ module Enumerable
       end
     end
     return nbr if params == ''
+
     nbr_arg
   end
 
   def my_map(proc = nil)
     array = []
     if block_given?
-      self.my_each do |a|
+      arr = self
+      arr.my_each do |a|
         array.push(yield(a))
       end
     elsif proc
-      self.my_each do |a|
+      arr = self
+      arr.my_each do |a|
         array.push(proc.call(a))
       end
     else
@@ -94,7 +102,8 @@ module Enumerable
   def my_inject(times = nil)
     tot = times
     tot = 0 if times.nil?
-    self.my_each do |a|
+    arr = self
+    arr.my_each do |a|
       tot = yield(a, tot)
     end
     tot
@@ -116,11 +125,13 @@ module Enumerable
   def my_map_block_proc(times = nil)
     map = []
     if times.nil? && block_given?
-      self.my_each do |i|
+      arr = self
+      arr.my_each do |i|
         map.push(times.call(i)) if times.call(i)
       end
     elsif times.nil?
-      self.my_each do |i|
+      arr = self
+      arr.my_each do |i|
         map.push(yield i) if yield i
       end
     else
