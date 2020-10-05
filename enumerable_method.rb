@@ -1,8 +1,7 @@
 module Enumerable
-
-  # Create #my_each, a method that is identical to 
-  # #each but (obviously) does not use #each. 
-  # You'll need to remember the yield statement. 
+  # Create #my_each, a method that is identical to
+  # #each but (obviously) does not use #each.
+  # You'll need to remember the yield statement.
   # Make sure it returns the same thing as #each as well.
 
   def my_each
@@ -20,7 +19,7 @@ module Enumerable
   # Create #my_select in the same way, though you may use #my_each in your definition (but not #each).
 
   def my_select
-    selected = Array.new
+    selected = []
     self.my_each do |i|
       selected << i if yield i
     end
@@ -29,26 +28,26 @@ module Enumerable
 
   def my_all?
     self.my_each do |i|
-      return false if !yield i
+      false if !yield i
     end
-    return true
+    true
   end
 
   def my_any?
     self.my_each do |i|
-      return true if yield i
+      true if yield i
     end
-    return false
+    false
   end
 
   def my_none?
     self.my_each do |i|
-      return false if yield i
+      false if yield i
     end
-    return true
+    true
   end
 
-  def my_count(params = "")
+  def my_count(params = '')
     nbr = 0
     nbr_arg = 0
     self.my_each do |i|
@@ -58,12 +57,12 @@ module Enumerable
         nbr += 1
       end
     end
-    return nbr if params == ""
-    return nbr_arg
+    nbr if params == ''
+    nbr_arg
   end
 
   def my_map
-    map = Array.new
+    map = []
     self.my_each do |i|
       map.push(yield i) if yield i
     end
@@ -74,18 +73,18 @@ module Enumerable
     tot = times
     tot = 0 if times.nil?
     self.my_each do |a|
-      tot = yield(a, tot) 
+      tot = yield(a, tot)
     end
     tot
   end
 
-  #Test #my_inject by creating a method called #multiply_els which 
-  #multiplies all the elements of the array together by using #my_inject, 
-  #e.g. multiply_els([2,4,5]) #=> 40
+  # Test #my_inject by creating a method called #multiply_els which
+  # multiplies all the elements of the array together by using #my_inject,
+  # e.g. multiply_els([2,4,5]) #=> 40
 
   def self.multiply_els(times = nil)
     tot = 1
-    return tot if times.nil?
+    tot if times.nil?
     times.my_inject do |a|
       tot *= a
     end
@@ -100,13 +99,13 @@ module Enumerable
     end
   end
 
-  def my_map_block_proc(times=nil)
-    map = Array.new
-    if times.nil? and block_given?
+  def my_map_block_proc(times = nil)
+    map = []
+    if times.nil? && block_given?
       self.my_each do |i|
         map.push(times.call(i)) if times.call(i)
       end
-    elsif times.nil? 
+    elsif times.nil?
       self.my_each do |i|
         map.push(yield i) if yield i
       end
