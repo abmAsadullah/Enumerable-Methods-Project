@@ -69,12 +69,20 @@ module Enumerable
     nbr_arg
   end
 
-  def my_map
-    map = []
-    self.my_each do |i|
-      map.push(yield i)
+  def my_map(proc = nil)
+    array = []
+    if block_given?
+      self.my_each do |a|
+        array.push(yield(a))
+      end
+    elsif proc
+      self.my_each do |a|
+        array.push(proc.call(a))
+      end
+    else
+      return self
     end
-    map
+    return array
   end
 
   def my_inject(times = nil)
@@ -97,14 +105,6 @@ module Enumerable
       tot *= a
     end
     tot
-  end
-
-  # Modify your #my_map method to take a proc instead.
-
-  def my_map_proc(proc)
-    self.each do |name|
-      proc.call(name)
-    end
   end
 
   def my_map_block_proc(times = nil)
@@ -161,13 +161,17 @@ module Enumerable
   #   puts "my counting c : #{c.my_count(nil)} \n\n"
   #   puts "counting c : #{c.count(nil)}\n\n"
 
-  p [1, 2, 3, 4].map { |num| num > 0 }
-  p [1, 2, 3, 4].my_map { |num| num > 0 }
+#   p [1, 2, 3, 4].map { |num| num > 0 }
+#   p [1, 2, 3, 4].my_map { |num| num > 0 }
+
+#   p = Proc.new { |i| puts i+2 }
+#   [1,2,3,4].my_map(p)
 
 
-friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
 
-  p friends.map { |friend| friend.upcase }
-  p friends.my_map { |friend| friend.upcase }
+# friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
+
+#   p friends.map { |friend| friend.upcase }
+#   p friends.my_map { |friend| friend.upcase }
 
 end
