@@ -12,8 +12,11 @@ module Enumerable
   end
 
   def my_each_with_index
-    for i in 0..self.length - 1 do
-      yield self[i], i
+    return self unless block_given?
+    index = 0
+    for i in self do
+      yield i, index
+      index += 1
     end
   end
 
@@ -116,7 +119,15 @@ module Enumerable
     map
   end
 
-  ["Jeph", "Anna", "Jack", "Eva"].my_each 
+  #["Jeph", "Anna", "Jack", "Eva"].my_each { |friend| puts "Helloo, " + friend  }
+  #["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index.to_s }
+  #["Jeph", "Anna", "Jack", "Eva"].my_each_with_index { |friend, index| puts "Helloo, " + friend + index.to_s }
+  #["Jeph", "Anna", "Jack", "Eva"].my_each_with_index 
+  #(5..50).my_each_with_index { |num| num }
+  # (5..50).my_each_with_index { |num, i| num.to_s + i.to_s  }
+  # (5..50).each_with_index { |num, i| num.to_s + i.to_s  }
+  
+
 
 
 end
