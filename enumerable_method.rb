@@ -72,7 +72,7 @@ module Enumerable
   def my_map
     map = []
     self.my_each do |i|
-      map.push(yield i) if yield i
+      map.push(yield i)
     end
     map
   end
@@ -134,33 +134,40 @@ module Enumerable
   #puts ["ant", "bear", "cat", /like/].all? { |word| word.length >= 3 }
   #puts ["ant", "bear", "cat", /like/].my_all? { |word| word.length >= 3}
 
-  # declaring array 3
-    a = ["abc", "nil", "dog"]
-    #a = [18, 22, 33, nil, 5, 6]
+  # # declaring array 3
+  #   a = ["abc", "nil", "dog"]
+  #   #a = [18, 22, 33, nil, 5, 6]
     
-    # # declaring array 
-    b = ["cow", nil, "dog"] 
-     #b = [1, 4, 1, 1, 88, 9, 1]
+  #   # # declaring array 
+  #   b = ["cow", nil, "dog"] 
+  #    #b = [1, 4, 1, 1, 88, 9, 1]
 
     
-    # # declaring array 0
-    #c = ["cat", nil, nil] 
-    c = [18, 22, nil, nil, 50, 6] 
+  #   # # declaring array 0
+  #   #c = ["cat", nil, nil] 
+  #   c = [18, 22, nil, nil, 50, 6] 
 
     
-    #counting total elements 
-    puts "my counting a : #{a.my_count}\n\n"
-    puts "counting a : #{a.count}\n\n"
+  #   #counting total elements 
+  #   puts "my counting a : #{a.my_count}\n\n"
+  #   puts "counting a : #{a.count}\n\n"
     
-    # counting 1 -  
-    puts "my counting b : #{b.my_count(1)}\n\n"
-    puts "counting b : #{b.count(1)}\n\n"
+  #   # counting 1 -  
+  #   puts "my counting b : #{b.my_count(1)}\n\n"
+  #   puts "counting b : #{b.count(1)}\n\n"
     
     
-    # # counting 'nil' 2
-    puts "my counting c : #{c.my_count(nil)} \n\n"
-    puts "counting c : #{c.count(nil)}\n\n"
+  #   # # counting 'nil' 2
+  #   puts "my counting c : #{c.my_count(nil)} \n\n"
+  #   puts "counting c : #{c.count(nil)}\n\n"
+
+  p [1, 2, 3, 4].map { |num| num > 0 }
+  p [1, 2, 3, 4].my_map { |num| num > 0 }
 
 
+friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
+
+  p friends.map { |friend| friend.upcase }
+  p friends.my_map { |friend| friend.upcase }
 
 end
