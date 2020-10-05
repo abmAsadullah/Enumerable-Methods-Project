@@ -28,7 +28,7 @@ module Enumerable
 
   def my_all?
     self.my_each do |i|
-      unless !yield i
+      false if !yield i
     end
     true
   end
