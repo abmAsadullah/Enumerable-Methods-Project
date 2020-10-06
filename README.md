@@ -4,7 +4,7 @@
 
 # Enumerable Methods
 
-This is a Ruby module that replicates the enumerable methods .each, .select, .all?, .any?, .none?, .count, .map and .inject.
+This is a Ruby module that replicates the enumerable methods `.each`, `.select`, `.all?`, `.any?`, `.none?`, `.count`, `.map` and `.inject`.
 
 ## Built With
 

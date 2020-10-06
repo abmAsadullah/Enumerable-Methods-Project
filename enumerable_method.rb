@@ -1,3 +1,5 @@
+# rubocop:disable Style/For
+# rubocop:disable Metrics/ModuleLength
 module Enumerable
   # Create #my_each, a method that is identical to
   # #each but (obviously) does not use #each.
@@ -140,3 +142,6 @@ module Enumerable
     map
   end
 end
+
+# rubocop:enable Style/For
+# rubocop:enable Metrics/ModuleLength
