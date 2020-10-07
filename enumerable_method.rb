@@ -42,7 +42,6 @@ module Enumerable
 
   def my_all?(args = nil)
     arr = to_a
-    p arr
     if !block_given? && args.nil?
       arr.my_each do |i|
         return false unless i
@@ -68,21 +67,53 @@ module Enumerable
   end
 
   def my_any?(args = nil)
-    return true unless block_given? && args.nil?
-
-    ar = self
-    ar.my_each do |i|
-      return true if yield i
+    arr = to_a
+    if !block_given? && args.nil?
+      arr.my_each do |i|
+        return true if i
+      end
+    elsif args.is_a? Regexp
+      arr.my_each do |i|
+        return true if i.class == args
+      end
+    elsif args.is_a? Class
+      arr.my_each do |i|
+        return true if i.is_a? args
+      end
+    elsif args
+      arr.my_each do |i|
+        return true if i == args
+      end
+    else
+      arr.my_each do |i|
+        return true if yield i
+      end
     end
     false
   end
 
   def my_none?(args = nil)
-    return true unless block_given? && args.nil?
-
-    arr = self
-    arr.my_each do |i|
-      return false if yield i
+    arr = to_a
+    if !block_given? && args.nil?
+      arr.my_each do |i|
+        return false if i
+      end
+    elsif args.is_a? Regexp
+      arr.my_each do |i|
+        return false if i.class == args
+      end
+    elsif args.is_a? Class
+      arr.my_each do |i|
+        return false if i.is_a? args
+      end
+    elsif args
+      arr.my_each do |i|
+        return false if i == args
+      end
+    else
+      arr.my_each do |i|
+        return false if yield i
+      end
     end
     true
   end
