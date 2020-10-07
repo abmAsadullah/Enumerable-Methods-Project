@@ -10,7 +10,7 @@ module Enumerable
   # Make sure it returns the same thing as #each as well.
 
   def my_each
-    return self unless block_given?
+    return to_enum unless block_given?
 
     for value in self do
       yield value
@@ -18,7 +18,7 @@ module Enumerable
   end
 
   def my_each_with_index
-    return self unless block_given?
+    return to_enum unless block_given?
 
     index = 0
     for i in self do
@@ -30,7 +30,7 @@ module Enumerable
   # Create #my_select in the same way, though you may use #my_each in your definition (but not #each).
 
   def my_select
-    return self unless block_given?
+    return to_enum unless block_given?
 
     selected = []
     arr = self
