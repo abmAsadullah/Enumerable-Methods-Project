@@ -137,21 +137,31 @@ module Enumerable
 
   def my_map(proc = nil)
     array = []
-    if block_given?
+    if block_given? && !proc
       arr = self
       arr.my_each do |a|
         array.push(yield(a))
       end
-    elsif proc
+    elsif proc && block_given?
+      arr = self
+      arr.my_each do |a|
+        array.push(proc.call(a))
+      end
+    elsif proc && !block_given?
       arr = self
       arr.my_each do |a|
         array.push(proc.call(a))
       end
     else
-      return self
+      return to_enum
     end
     array
   end
+
+  array = Array.new(100) { rand(0...9) }
+  my_proc = proc { |num| num > 10 }
+
+  p array.my_map(my_proc) { |num| num < 10 } # should be an array or false variables, got an array of true variables instead
 
   # Test #my_inject by creating a method called #multiply_els which
   # multiplies all the elements of the array together by using #my_inject,
