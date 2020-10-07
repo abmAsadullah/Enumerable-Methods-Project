@@ -1,7 +1,8 @@
 # rubocop:disable Style/For
 # rubocop:disable Metrics/ModuleLength
 # rubocop:disable Metrics/MethodLength
-# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/CyclomaticComplexity)
+# rubocop:disable Metrics/PerceivedComplexity
 module Enumerable
   # Create #my_each, a method that is identical to
   # #each but (obviously) does not use #each.
@@ -40,11 +41,28 @@ module Enumerable
   end
 
   def my_all?(args = nil)
-    return true unless block_given? && args.nil?
-
-    arr = self
-    arr.my_each do |i|
-      return false unless yield i
+    arr = to_a
+    p arr
+    if !block_given? && args.nil?
+      arr.my_each do |i|
+        return false unless i
+      end
+    elsif args.is_a? Regexp
+      arr.my_each do |i|
+        return false unless i.class == args
+      end
+    elsif args.is_a? Class
+      arr.my_each do |i|
+        return false unless i.is_a? args
+      end
+    elsif args
+      arr.my_each do |i|
+        return false unless i == args
+      end
+    else
+      arr.my_each do |i|
+        return false unless yield i
+      end
     end
     true
   end
@@ -148,4 +166,5 @@ end
 # rubocop:enable Style/For
 # rubocop:enable Metrics/ModuleLength
 # rubocop:enable Metrics/MethodLength
-# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/CyclomaticComplexity)
+# rubocop:enable Metrics/PerceivedComplexity
