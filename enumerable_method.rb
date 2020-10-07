@@ -119,18 +119,19 @@ module Enumerable
   end
 
   def my_count(params = '')
-    nbr = 0
     nbr_arg = 0
     arr = self
-    arr.my_each do |i|
-      if i == params
-        nbr_arg += 1
-      else
-        nbr += 1
+    if !params.empty?
+      arr.my_each do |i|
+        nbr_arg += 1 if i == params
       end
+    elsif block_given?
+      arr.my_each do |i|
+        nbr_arg += 1 if yield(i)
+      end
+    else
+      nbr_arg += 1
     end
-    return nbr if params == ''
-
     nbr_arg
   end
 
