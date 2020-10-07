@@ -158,11 +158,6 @@ module Enumerable
     array
   end
 
-  array = Array.new(100) { rand(0...9) }
-  my_proc = proc { |num| num > 10 }
-
-  p array.my_map(my_proc) { |num| num < 10 } # should be an array or false variables, got an array of true variables instead
-
   # Test #my_inject by creating a method called #multiply_els which
   # multiplies all the elements of the array together by using #my_inject,
   # e.g. multiply_els([2,4,5]) #=> 40
@@ -179,29 +174,39 @@ module Enumerable
   def my_inject(*args)
     arr = to_a
     if block_given?
-      res = args[0].nil? ? arr[0] : args[0]
-      return arr if args[0].nil?
-
-      arr.my_each do |a|
-        res = yield(res, a)
-      end
-      return res
-    else
-      symb = nil
-      if args[1].nil?
+      if args.length == 1 && args[0].class == Symbol
         symb = args[0]
+        res = nil
+      elsif args.length == 1
+        symb = nil
         res = args[0]
-      end
-      unless args[1].nil?
+      elsif args.length == 2
         symb = args[1]
         res = args[0]
+      else
+        symb = nil
+        res = nil
       end
-
-      arr.my_each do |a|
-        res = res.send(symb, a)
+      if res.nil?
+        tot = arr[0] # from 1
+        check = 0
+      else
+        tot = res # from 0
+        check = 1
       end
+      lambda_ = if symb.nil?
+               ->(tot, obj) { yield(tot, obj) }
+             else
+               ->(tot, obj) { tot.send(symb, obj) }
+             end
+      arr.my_each do |i|
+        tot = lambda_.call(tot, i) if check == 1
+        check = 1
+      end
+      tot
+    else
+      warn 'LocalJumpError: no block given'
     end
-    res
   end
 end
 
