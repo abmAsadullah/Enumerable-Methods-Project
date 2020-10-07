@@ -48,7 +48,7 @@ module Enumerable
       end
     elsif args.is_a? Regexp
       arr.my_each do |i|
-        return false unless i.class == args
+        return true if args.match(i)
       end
     elsif args.is_a? Class
       arr.my_each do |i|
@@ -74,7 +74,7 @@ module Enumerable
       end
     elsif args.is_a? Regexp
       arr.my_each do |i|
-        return true if i.class == args
+        return true if args.match(i)
       end
     elsif args.is_a? Class
       arr.my_each do |i|
@@ -100,7 +100,7 @@ module Enumerable
       end
     elsif args.is_a? Regexp
       arr.my_each do |i|
-        return false if i.class == args
+        return true if i.class == args
       end
     elsif args.is_a? Class
       arr.my_each do |i|
