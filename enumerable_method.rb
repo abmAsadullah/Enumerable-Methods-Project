@@ -115,18 +115,25 @@ module Enumerable
   end
 
   def my_inject(*args)
-    arr = to_a # Convert the self to an array
+    arr = to_a
     if block_given?
-      res = args[0].nil? ? arr[0] : args[0] # If there is an argument, res = the arg
-      return arr if args[0].nil? # return if no params passed into method
+      res = args[0].nil? ? arr[0] : args[0]
+      return arr if args[0].nil?
+
       arr.my_each do |a|
         res = yield(res, a)
       end
       return res
     else
       symb = nil
-      symb, res = args[0], arr[0] if args[1].nil?
-      symb, res = args[1], args[0] unless args[1].nil?
+      if args[1].nil?
+        symb = args[0]
+        res = args[0]
+      end
+      unless args[1].nil?
+        symb = args[1]
+        res = args[0]
+      end
 
       arr.my_each do |a|
         res = res.send(symb, a)
