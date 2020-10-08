@@ -130,7 +130,7 @@ module Enumerable
         nbr_arg += 1 if yield(i)
       end
     else
-      arr.my_each do |i|
+      arr.my_each
         nbr_arg += 1
       end
     end
