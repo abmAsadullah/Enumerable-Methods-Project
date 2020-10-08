@@ -191,7 +191,7 @@ module Enumerable
         tot = res # from 0
         check = 1
       end
-      lambda_ = symb.nil? ? ->(val, bar) { yield(tot, bar) } : ->(val, bar) { tot.send(symb, bar) }
+      lambda_ = symb.nil? ? ->(_, bar) { yield(tot, bar) } : ->(_, bar) { tot.send(symb, bar) }
       arr.my_each do |i|
         tot = lambda_.call(tot, i) if check == 1
         check = 1
