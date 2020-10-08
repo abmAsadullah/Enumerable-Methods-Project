@@ -160,14 +160,6 @@ module Enumerable
     array
   end
 
-  # Test #my_inject by creating a method called #multiply_els which
-  # multiplies all the elements of the array together by using #my_inject,
-  # e.g. multiply_els([2,4,5]) #=> 40
-
-  def multiply_els(times = nil)
-    times.my_inject(:*)
-  end
-
   def my_inject(*args)
     arr = to_a
     if !block_given? && args.empty?
@@ -201,6 +193,14 @@ module Enumerable
       tot
     end
   end
+end
+
+# Test #my_inject by creating a method called #multiply_els which
+# multiplies all the elements of the array together by using #my_inject,
+# e.g. multiply_els([2,4,5]) #=> 40
+
+def multiply_els(times = nil)
+  times.my_inject(:*)
 end
 
 # rubocop:enable Style/For
