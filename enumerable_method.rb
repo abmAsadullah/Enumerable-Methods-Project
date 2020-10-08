@@ -163,17 +163,12 @@ module Enumerable
   # e.g. multiply_els([2,4,5]) #=> 40
 
   def self.multiply_els(times = nil)
-    tot = 1
-    tot if times.nil?
-    times.my_inject do |a|
-      tot *= a
-    end
-    tot
+    times.my_inject(:*)
   end
 
   def my_inject(*args)
     arr = to_a
-    if !block_given? && args.length < 1
+    if !block_given? && args.empty?
       warn 'LocalJumpError: no block given'
     else
       if args.length == 1 && args[0].class == Symbol
@@ -196,7 +191,7 @@ module Enumerable
         tot = res # from 0
         check = 1
       end
-      lambda_ = symb.nil? ? ->(tot, obj) { yield(tot, obj) } : ->(tot, obj) { tot.send(symb, obj) }
+      lambda_ = symb.nil? ? ->(tot, bar) { yield(tot, bar) } : ->(tot, bar) { tot.send(symb, bar) }
       arr.my_each do |i|
         tot = lambda_.call(tot, i) if check == 1
         check = 1
