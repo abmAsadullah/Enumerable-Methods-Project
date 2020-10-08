@@ -48,7 +48,7 @@ module Enumerable
       end
     elsif args.is_a? Regexp
       arr.my_each do |i|
-        return true if args.match(i)
+        return false unless args.match(i)
       end
     elsif args.is_a? Class
       arr.my_each do |i|
@@ -199,6 +199,23 @@ module Enumerable
       tot
     end
   end
+  words = %w[dog door rod blade]
+
+p words.my_all?(/o/) #should be true, returns false instead
+p words.my_any?(/o/) #should be true, returns false instead
+p words.my_none?(/o/) #should be false, returns true instead
+puts ""
+p words.all?(/o/) #should be true, returns false instead
+p words.any?(/o/) #should be true, returns false instead
+p words.none?(/o/) #should be false, returns true instead
+puts "-----"
+p words.my_all?(/d/) #should be true, returns false instead
+p words.my_any?(/d/) #should be true, returns false instead
+p words.my_none?(/d/) #should be false, returns true instead
+puts ""
+p words.all?(/d/) #should be true, returns false instead
+p words.any?(/d/) #should be true, returns false instead
+p words.none?(/d/) #should be false, returns true instead
 end
 
 # rubocop:enable Style/For
