@@ -173,7 +173,9 @@ module Enumerable
 
   def my_inject(*args)
     arr = to_a
-    if block_given?
+    if !block_given? && args.length < 1
+      warn 'LocalJumpError: no block given'
+    else
       if args.length == 1 && args[0].class == Symbol
         symb = args[0]
         res = nil
@@ -194,18 +196,12 @@ module Enumerable
         tot = res # from 0
         check = 1
       end
-      lambda_ = if symb.nil?
-               ->(tot, obj) { yield(tot, obj) }
-             else
-               ->(tot, obj) { tot.send(symb, obj) }
-             end
+      lambda_ = symb.nil? ? ->(tot, obj) { yield(tot, obj) } : ->(tot, obj) { tot.send(symb, obj) }
       arr.my_each do |i|
         tot = lambda_.call(tot, i) if check == 1
         check = 1
       end
       tot
-    else
-      warn 'LocalJumpError: no block given'
     end
   end
 end
