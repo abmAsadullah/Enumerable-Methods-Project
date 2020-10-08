@@ -164,14 +164,14 @@ module Enumerable
   # multiplies all the elements of the array together by using #my_inject,
   # e.g. multiply_els([2,4,5]) #=> 40
 
-  def self.multiply_els(times = nil)
+  def multiply_els(times = nil)
     times.my_inject(:*)
   end
 
   def my_inject(*args)
     arr = to_a
     if !block_given? && args.empty?
-      warn 'LocalJumpError: no block given'
+      yield
     else
       if args.length == 1 && args[0].class == Symbol
         symb = args[0]
