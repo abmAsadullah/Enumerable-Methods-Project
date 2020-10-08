@@ -118,10 +118,10 @@ module Enumerable
     true
   end
 
-  def my_count(params = '')
+  def my_count(params = nil)
     nbr_arg = 0
-    arr = self
-    if !params.empty?
+    arr = to_a
+    if !params.nil?
       arr.my_each do |i|
         nbr_arg += 1 if i == params
       end
@@ -130,7 +130,9 @@ module Enumerable
         nbr_arg += 1 if yield(i)
       end
     else
-      nbr_arg += 1
+      arr.my_each do |i|
+        nbr_arg += 1
+      end
     end
     nbr_arg
   end
@@ -199,23 +201,6 @@ module Enumerable
       tot
     end
   end
-  words = %w[dog door rod blade]
-
-p words.my_all?(/o/) #should be true, returns false instead
-p words.my_any?(/o/) #should be true, returns false instead
-p words.my_none?(/o/) #should be false, returns true instead
-puts ""
-p words.all?(/o/) #should be true, returns false instead
-p words.any?(/o/) #should be true, returns false instead
-p words.none?(/o/) #should be false, returns true instead
-puts "-----"
-p words.my_all?(/d/) #should be true, returns false instead
-p words.my_any?(/d/) #should be true, returns false instead
-p words.my_none?(/d/) #should be false, returns true instead
-puts ""
-p words.all?(/d/) #should be true, returns false instead
-p words.any?(/d/) #should be true, returns false instead
-p words.none?(/d/) #should be false, returns true instead
 end
 
 # rubocop:enable Style/For
